@@ -39,10 +39,8 @@ http://localhost:5000/list_nodes
 Step 5 : Health Monitoring
 curl http://localhost:5000/check_health
 
-To make nodes send heartbeats, use PowerShell or CMD:
-while ($true) {
-    Invoke-RestMethod -Method Post -Uri "http://localhost:5000/heartbeat" `
-        -Body '{"node_id": "your_node_id_here"}' `
-        -ContentType "application/json"
-    Start-Sleep -Seconds 5
-}
+Step 6 : Simulate Node Failure 
+docker stop node1
+curl http://localhost:5000/list_nodes
+curl http://localhost:5000/list_pods
+
