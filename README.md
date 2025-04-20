@@ -35,20 +35,20 @@ Technology Stack
 
 Weekly Guidelines
 
-1. Week 1 (15 M)
+Week 1 (15 M)
 
 1. Implement API Server base implementation and Node Manager functionality.
 
 2. Add a Node → Provide CPU cores to join the cluster (launch new container).
 
 
-2. Week 2 (15 M)
+Week 2 (15 M)
 
 1. Implement Pod Scheduler and Health Monitor with node heartbeat mechanism.
 
 2. Launch a Pod → Request a pod with CPU system assigns it automatically (adds to node's pod ID array).
 
-3. Week 3 (10 M)
+Week 3 (10 M)
 
 1. List Nodes → See all nodes and their health status.
 
