@@ -7,6 +7,7 @@ Develop a lightweight, simulation-based distributed system that mimics core Kube
 The system will create a simplified yet comprehensive platform for demonstrating key distributed computing concepts
 
 High Level Architecture
+
 ● Implement an API server that integrates key functionalities such as node management, pod scheduling, and health monitoring.
 
 ● Nodes periodically send health signals for themselves
