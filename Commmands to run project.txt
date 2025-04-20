@@ -1,0 +1,48 @@
+Step 1: Start the Flask API Server
+Open Command Prompt or Terminal, navigate to the folder containing api_server.py, then run:
+
+python api_server.py
+
+This will start the server at:
+http://localhost:5000
+
+Step 2: Launch 5 Docker Containers as Nodes
+Now open another new terminal window, and run these one at a time:
+
+docker run -d --name node1 --env CPU_CORES=4 node-simulator
+docker run -d --name node2 --env CPU_CORES=4 node-simulator
+docker run -d --name node3 --env CPU_CORES=2 node-simulator
+docker run -d --name node4 --env CPU_CORES=6 node-simulator
+docker run -d --name node5 --env CPU_CORES=8 node-simulator
+
+Step 3: Check Registered Nodes
+Let’s see all nodes that registered. Run this command in your terminal:
+curl http://localhost:5000/list_nodes
+
+Step 4 : Launch Pods 
+A. First-Fit (Default)
+Invoke-RestMethod -Method Post -Uri "http://localhost:5000/launch_pod" `
+  -Body '{"cpu": 4}' `
+  -ContentType "application/json"
+B. Best-Fit
+Invoke-RestMethod -Method Post -Uri "http://localhost:5000/launch_pod" `
+  -Body '{"cpu": 2, "algorithm": "best_fit"}' `
+  -ContentType "application/json"
+C. Worst-Fit
+Invoke-RestMethod -Method Post -Uri "http://localhost:5000/launch_pod" `
+  -Body '{"cpu": 4, "algorithm": "worst_fit"}' `
+  -ContentType "application/json"
+
+http://localhost:5000/list_pods
+http://localhost:5000/list_nodes
+
+Step 5 : Health Monitoring
+curl http://localhost:5000/check_health
+
+To make nodes send heartbeats, use PowerShell or CMD:
+while ($true) {
+    Invoke-RestMethod -Method Post -Uri "http://localhost:5000/heartbeat" `
+        -Body '{"node_id": "your_node_id_here"}' `
+        -ContentType "application/json"
+    Start-Sleep -Seconds 5
+}
